@@ -23,10 +23,10 @@ public class HUDManager : MonoBehaviour
 
     private void Start()
     {
-        Initialize();
+        InitializeHUD();
     }
 
-    public void Initialize()
+    public void InitializeHUD()
     {
         movesCounterText.text = "0";
     }

@@ -37,10 +37,10 @@ public class TowersManager : MonoBehaviour
         towers.Add(Location.Center, towerCenter);
         towers.Add(Location.Right, towerRight);
 
-        InitializeT();
+        InitializeTowers();
     }
 
-    public void InitializeT()
+    public void InitializeTowers()
     {
         towerLeft.Clear();
         towerCenter.Clear();

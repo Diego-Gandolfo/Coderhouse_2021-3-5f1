@@ -24,9 +24,8 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-        //TowersManager.Instance.Initialize();
-        HUDManager.Instance.Initialize();
-        TowersManager.Instance.InitializeT();
+        HUDManager.Instance.InitializeHUD();
+        TowersManager.Instance.InitializeTowers();
     }    
 
     public void IncreaseMovesCounter()
