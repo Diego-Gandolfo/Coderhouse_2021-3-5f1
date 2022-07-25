@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +12,8 @@ public class TowersManager : MonoBehaviour
 
     [SerializeField] private Block[] blocks;
 
+    private bool isGameRunning;
+
     private Stack<Block> towerLeft = new Stack<Block>();
     private Stack<Block> towerCenter = new Stack<Block>();
     private Stack<Block> towerRight = new Stack<Block>();
@@ -20,6 +21,22 @@ public class TowersManager : MonoBehaviour
     private Dictionary<Location, Stack<Block>> towers = new Dictionary<Location, Stack<Block>>();
 
     private void Awake()
+    {
+        InitializeSingleton();
+    }
+
+    private void Start()
+    {
+        InitializeDictionary();
+        InitializeTowers();
+    }
+
+    private void Update()
+    {
+        CheckVictory();
+    }
+
+    private void InitializeSingleton()
     {
         if (Instance == null)
         {
@@ -31,17 +48,17 @@ public class TowersManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void InitializeDictionary()
     {
         towers.Add(Location.Left, towerLeft);
         towers.Add(Location.Center, towerCenter);
         towers.Add(Location.Right, towerRight);
-
-        InitializeTowers();
     }
 
-    public void InitializeTowers()
+    private void InitializeTowers()
     {
+        isGameRunning = true;
+        
         towerLeft.Clear();
         towerCenter.Clear();
         towerRight.Clear();
@@ -54,8 +71,31 @@ public class TowersManager : MonoBehaviour
         }
     }
 
+    private void CheckVictory()
+    {
+        if (towerRight.Count == 4 && isGameRunning)
+        {
+            isGameRunning = false;
+            GameManager.Instance.Victory();
+        }
+    }
+
+    private bool CheckMoveBlock(Location origin, Location destination)
+    {
+        var towerOrigin = towers[origin];
+        var towerDestination = towers[destination];
+
+        if (towerOrigin.Count == 0) return false;
+        if (towerDestination.Count == 0) return true;
+        if (towerOrigin.Peek().GetWeight() > towerDestination.Peek().GetWeight()) return false;
+
+        return true;
+    }
+
     public void MoveBlock(Location origin, Location destination)
     {
+        if (!CheckMoveBlock(origin, destination)) return;
+
         var towerOrigin = towers[origin];
         var towerDestination = towers[destination];
         var direction = ((int)destination - (int)origin);
@@ -68,5 +108,10 @@ public class TowersManager : MonoBehaviour
         block.transform.localPosition = new Vector3(x, y, 0f);
 
         GameManager.Instance.IncreaseMovesCounter();
+    }
+
+    public void InitializeTowersManager()
+    {
+        InitializeTowers();
     }
 }

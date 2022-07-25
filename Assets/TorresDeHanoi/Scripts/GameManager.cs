@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -20,12 +18,25 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        bestGame = int.MaxValue;
+    }
+
+    public int GetBestGameInfo()
+    {
+        return bestGame;
+    }
+
+    public void ResetMovesCounter()
+    {
+        movesCounter = 0;
     }
 
     public void Restart()
     {
-        HUDManager.Instance.InitializeHUD();
-        TowersManager.Instance.InitializeTowers();
+        ResetMovesCounter();
+        HUDManager.Instance.InitializeHUDManager();
+        TowersManager.Instance.InitializeTowersManager();
     }    
 
     public void IncreaseMovesCounter()
@@ -41,11 +52,14 @@ public class GameManager : MonoBehaviour
 
     public void Victory()
     {
-
-    }
-
-    public void Gameover()
-    {
-
+        if (movesCounter < bestGame)
+        {
+            bestGame = movesCounter;
+            HUDManager.Instance.Victory(true);
+        }
+        else
+        {
+            HUDManager.Instance.Victory(false);
+        }
     }
 }
