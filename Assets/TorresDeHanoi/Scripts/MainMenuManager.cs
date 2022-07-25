@@ -28,7 +28,6 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-
     public void Play()
     {
         GameManager.Instance.ResetMovesCounter();
