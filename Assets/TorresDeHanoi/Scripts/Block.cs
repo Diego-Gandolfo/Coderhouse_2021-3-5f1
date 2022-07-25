@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private int weight;
+    
+    public int GetWeight()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return weight;
     }
 }
