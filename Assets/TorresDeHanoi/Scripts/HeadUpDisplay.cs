@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class HUDManager : MonoBehaviour
+public class HeadUpDisplay : MonoBehaviour
 {
-    public static HUDManager Instance;
+    public static HeadUpDisplay Instance;
 
     [SerializeField] private GameObject game;
     [SerializeField] private GameObject victory;
@@ -13,27 +13,16 @@ public class HUDManager : MonoBehaviour
 
     private void Awake()
     {
-        InitializeSingleton();
+        if (GameManager.Instance == null) return;
+        GameManager.Instance.headUpDisplay = this;
     }
 
     private void Start()
     {
-        InitializeHUD();
+        InitializeHeadUpDisplay();
     }
 
-    private void InitializeSingleton()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private void InitializeHUD()
+    public void InitializeHeadUpDisplay()
     {
         movesCounterText.text = "0";
         game.SetActive(true);
@@ -42,12 +31,7 @@ public class HUDManager : MonoBehaviour
 
     public void UpdateMovesCounterText()
     {
-        movesCounterText.text = GameManager.Instance.GetMovesCounterInfo().ToString();
-    }
-
-    public void InitializeHUDManager()
-    {
-        InitializeHUD();
+        movesCounterText.text = GameManager.Instance.movesCounter.ToString();
     }
 
     public void Victory(bool record = false)

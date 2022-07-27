@@ -2,35 +2,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MainMenuManager : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
-    public static MainMenuManager Instance;
-
     [SerializeField] private Text bestGameText;
 
     private void Awake()
     {
-        InitializeSingleton();
-
         if (GameManager.Instance == null) return;
-        bestGameText.text = GameManager.Instance.GetBestGameInfo().ToString();
+        bestGameText.text = GameManager.Instance.bestGame.ToString();
     }
-
-    private void InitializeSingleton()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
+    
     public void Play()
     {
-        GameManager.Instance.ResetMovesCounter();
         SceneManager.LoadScene("02_Game");
     }
 

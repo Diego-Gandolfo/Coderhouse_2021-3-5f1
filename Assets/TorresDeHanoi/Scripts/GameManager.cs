@@ -4,8 +4,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    private int movesCounter;
-    private int bestGame;
+    public HeadUpDisplay headUpDisplay;
+
+    public int bestGame = int.MaxValue;
+    public int movesCounter;
 
     private void Awake()
     {
@@ -18,36 +20,18 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        bestGame = int.MaxValue;
-    }
-
-    public int GetBestGameInfo()
-    {
-        return bestGame;
-    }
-
-    public void ResetMovesCounter()
-    {
-        movesCounter = 0;
     }
 
     public void Restart()
     {
-        ResetMovesCounter();
-        HUDManager.Instance.InitializeHUDManager();
-        TowersManager.Instance.InitializeTowersManager();
+        headUpDisplay.InitializeHeadUpDisplay();
+        TowersManager.Instance.InitializeTowers();
     }    
 
     public void IncreaseMovesCounter()
     {
         movesCounter++;
-        HUDManager.Instance.UpdateMovesCounterText();
-    }
-
-    public int GetMovesCounterInfo()
-    {
-        return movesCounter;
+        headUpDisplay.UpdateMovesCounterText();
     }
 
     public void Victory()
@@ -55,11 +39,11 @@ public class GameManager : MonoBehaviour
         if (movesCounter < bestGame)
         {
             bestGame = movesCounter;
-            HUDManager.Instance.Victory(true);
+            headUpDisplay.Victory(true);
         }
         else
         {
-            HUDManager.Instance.Victory(false);
+            headUpDisplay.Victory(false);
         }
     }
 }
