@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public HeadUpDisplay headUpDisplay;
 
     private float currentTime;
-    private float bestTime;
+    public float bestTime;
 
     public bool isGameRunning = true;
 
