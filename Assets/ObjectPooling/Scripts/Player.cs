@@ -1,22 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float movementSpeed;
     [SerializeField] private float rotationSpeed;
-    [SerializeField] private float life;
+    [SerializeField] private float maxLife;
 
     private Rigidbody myRigidbody;
 
     private Vector3 wantedDirection;
     private Vector3 wantedRotation;
 
+    private float currentLife;
+
     private void Start()
     {
         myRigidbody = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
+
+        currentLife = maxLife;
     }
 
     private void Update()
@@ -53,9 +55,10 @@ public class Player : MonoBehaviour
 
     public void MakeDamage(float damage)
     {
-        life -= damage;
+        currentLife -= damage;
+        GameManager.Instance.headUpDisplay.UpdateLife(currentLife, maxLife);
 
-        if (life <= 0f)
+        if (currentLife <= 0f)
         {
             GameManager.Instance.Gameover();
         }
