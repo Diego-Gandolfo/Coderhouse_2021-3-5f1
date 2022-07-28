@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     private float currentTime;
     public float bestTime;
 
-    public bool isGameRunning = true;
+    public bool isGameRunning;
 
     private void Awake()
     {
@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        isGameRunning = false;
+        bestTime = float.MaxValue;
     }
 
     private void Update()
@@ -49,11 +52,11 @@ public class GameManager : MonoBehaviour
         if (bestTime > currentTime)
         {
             bestTime = currentTime;
-            headUpDisplay.Victory(bestTime, true);
+            headUpDisplay.Victory(currentTime, true);
         }
         else
         {
-            headUpDisplay.Victory(currentTime, true);
+            headUpDisplay.Victory(currentTime);
         }
     }
 }

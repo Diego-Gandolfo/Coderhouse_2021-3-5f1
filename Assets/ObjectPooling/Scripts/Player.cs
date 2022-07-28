@@ -55,6 +55,8 @@ public class Player : MonoBehaviour
 
     public void MakeDamage(float damage)
     {
+        if (!GameManager.Instance.isGameRunning) return;
+        
         currentLife -= damage;
         GameManager.Instance.headUpDisplay.UpdateLife(currentLife, maxLife);
 

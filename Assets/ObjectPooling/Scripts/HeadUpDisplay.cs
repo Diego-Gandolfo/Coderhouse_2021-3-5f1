@@ -21,14 +21,20 @@ public class HeadUpDisplay : MonoBehaviour
 
         if (GameManager.Instance == null) return;
         GameManager.Instance.headUpDisplay = this;
+        GameManager.Instance.StartGame();
     }
 
-    private string FormatTime(float time)
+    private string FormatTime(float time, bool debug = false)
     {
         int minutes = (int) (time / 60);
         int seconds = (int) (time - (60 * minutes));
         int milliseconds = (int) ((time - (minutes * 60) - seconds) * 100);
-        return string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds);
+        if (debug)
+        {
+            print($"{minutes} : {seconds} : {milliseconds}");
+        }
+        var t = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds); 
+        return t;
     }
 
     public void UpdateLife(float currentLife, float maxLife)
@@ -47,7 +53,7 @@ public class HeadUpDisplay : MonoBehaviour
         goHUD.SetActive(false);
         goVictory.SetActive(true);
         newRecord.SetActive(mustShotNewRecord);
-        timeTextVictory.text = FormatTime(currentTime);
+        timeTextVictory.text = FormatTime(currentTime, true);
         GameManager.Instance.Gameover();
     }
 

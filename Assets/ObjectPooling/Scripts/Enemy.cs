@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     {
         var distance = Vector3.Distance(transform.position, playerTransform.position);
 
-        if (distance > 1f)
+        if (distance > 1.25f)
         {
             transform.position += transform.forward * movementSpeed * Time.deltaTime;
         }

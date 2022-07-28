@@ -9,7 +9,7 @@ public class MainMenu : MonoBehaviour
     private void Awake()
     {
         if (GameManager.Instance == null) return;
-        if (GameManager.Instance.bestTime == 0f) return;
+        if (GameManager.Instance.bestTime == float.MaxValue) return;
         bestTimeText.text = FormatTime(GameManager.Instance.bestTime);
     }
     
