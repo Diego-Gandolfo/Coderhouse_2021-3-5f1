@@ -4,15 +4,33 @@ using UnityEngine;
 
 public class ObjectPooling : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject prefab;
+
+    private Queue<GameObject> availableInstances = new Queue<GameObject>();
+    private List<GameObject> inUseInstances = new List<GameObject>();
+
+    public GameObject GetInstance()
     {
-        
+        GameObject clone;
+
+        if (availableInstances.Count > 0)
+        {
+            clone = availableInstances.Dequeue();
+        }
+        else
+        {
+            clone = Instantiate(prefab);
+        }
+
+        inUseInstances.Add(clone);
+        clone.SetActive(true);
+        return clone;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StoreInstance(GameObject clone)
     {
-        
+        inUseInstances.Remove(clone);
+        availableInstances.Enqueue(clone);
+        clone.SetActive(false);
     }
 }

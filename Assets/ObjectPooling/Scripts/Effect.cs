@@ -5,12 +5,13 @@ using UnityEngine;
 public class Effect : MonoBehaviour
 {
     [SerializeField] private float timeToDeactivate = 2.0f;
+    [SerializeField] private ParticleSystem effect;
 
     private float timeCounter;
 
     private void Start()
     {
-        timeCounter = timeToDeactivate;
+        Initialize();
     }
 
     private void Update()
@@ -24,7 +25,14 @@ public class Effect : MonoBehaviour
 
         if (timeCounter <= 0f)
         {
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+            PoolManager.Instance.effectPool.StoreInstance(gameObject);
         }
+    }
+
+    public void Initialize()
+    {
+        timeCounter = timeToDeactivate;
+        effect.Play();
     }
 }
