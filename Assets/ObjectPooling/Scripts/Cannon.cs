@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
-    //[SerializeField] private GameObject bulletPrefab; // TODO: usar ObjectPooling
+    [SerializeField] private GameObject bulletPrefab; // TODO: usar ObjectPooling
     [SerializeField] private Transform spawnpoint;
     [SerializeField] private float impulse = 10.0f;
     [SerializeField] private float cooldown = 0.5f;
@@ -34,8 +34,7 @@ public class Cannon : MonoBehaviour
 
     private void Shoot()
     {
-        //GameObject clone = Instantiate(bulletPrefab);
-        GameObject clone = PoolManager.Instance.bulletPool.GetInstance();
+        GameObject clone = Instantiate(bulletPrefab);
         clone.transform.position = spawnpoint.position;
         clone.transform.rotation = spawnpoint.rotation;
         Rigidbody rb = clone.GetComponent<Rigidbody>();

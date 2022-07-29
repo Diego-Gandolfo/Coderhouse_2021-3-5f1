@@ -186,7 +186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17b553629ab70d44b43b314795b2bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1007856541274760215, guid: 0238f8165d58b554a9784f7ab7c45e60, type: 3}
 --- !u!114 &761461378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,7 +198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17b553629ab70d44b43b314795b2bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8854322507858683201, guid: 792ad1bbe45d3114bbb6d1d4a9736063, type: 3}
 --- !u!114 &761461379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,8 +210,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451a7cf23b7c4794facbed838f099c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPool: {fileID: 761461378}
-  effectPool: {fileID: 761461377}
 --- !u!4 &761461380
 Transform:
   m_ObjectHideFlags: 0
@@ -258,6 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d33b8163e5ab2349b75f97d9b5b7ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8854322507858683201, guid: 792ad1bbe45d3114bbb6d1d4a9736063, type: 3}
   spawnpoint: {fileID: 1186863189}
   impulse: 10
   cooldown: 1
