@@ -8,7 +8,7 @@ public class Scorer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.KeypadPlus))
         {
-            // Incrementar el Score
+            GameManager.Instance.score++;
         }
     }
 }
