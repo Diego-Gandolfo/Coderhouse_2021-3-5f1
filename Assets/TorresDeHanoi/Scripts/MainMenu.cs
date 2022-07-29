@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
     private void Awake()
     {
         if (GameManager.Instance == null) return;
+        if (GameManager.Instance.bestGame == int.MaxValue) return;
         bestGameText.text = GameManager.Instance.bestGame.ToString();
     }
     
